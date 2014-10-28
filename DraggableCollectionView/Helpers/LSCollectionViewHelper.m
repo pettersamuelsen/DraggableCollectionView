@@ -12,6 +12,8 @@
 
 static int kObservingCollectionViewLayoutContext;
 
+static NSTimeInterval const LSCollectionViewScaleSpeedDefault = 0.3f;
+
 #ifndef CGGEOMETRY__SUPPORT_H_
 CG_INLINE CGPoint
 _CGPointAdd(CGPoint point1, CGPoint point2) {
@@ -54,6 +56,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
                              context:&kObservingCollectionViewLayoutContext];
         _scrollingEdgeInsets = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
         _scrollingSpeed = 300.f;
+        _scaleSpeed = LSCollectionViewScaleSpeedDefault;
         
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                        initWithTarget:self
@@ -239,7 +242,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             mockCenter = mockCell.center;
             [self.collectionView addSubview:mockCell];
             [UIView
-             animateWithDuration:0.3
+             animateWithDuration:self.scaleSpeed
              animations:^{
                  mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
              }
@@ -280,7 +283,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             // Switch mock for cell
             UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:self.layoutHelper.hideIndexPath];
             [UIView
-             animateWithDuration:0.3
+             animateWithDuration:self.scaleSpeed
              animations:^{
                  mockCell.center = layoutAttributes.center;
                  mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);

@@ -50,4 +50,20 @@
     [self getHelper].scrollingSpeed = scrollingSpeed;
 }
 
+- (NSTimeInterval)scaleSpeed {
+    return [self getHelper].scaleSpeed;
+}
+
+- (void)setScaleSpeed:(NSTimeInterval)scaleSpeed {
+    [self getHelper].scaleSpeed = scaleSpeed;
+}
+
+- (NSTimeInterval)minimumPressDuration {
+    return [self getHelper].longPressGestureRecognizer.minimumPressDuration;
+}
+
+- (void)setMinimumPressDuration:(NSTimeInterval)minimumPressDuration {
+    [self getHelper].longPressGestureRecognizer.minimumPressDuration = minimumPressDuration;
+}
+
 @end
